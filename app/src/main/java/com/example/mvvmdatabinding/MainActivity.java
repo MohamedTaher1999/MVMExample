@@ -20,28 +20,24 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     ItemViewModel itemViewModel;
     AdapterItem adapterItem;
-    private ActivityMainBinding binding;
+    private ActivityMainBinding activityMainBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         itemViewModel= ViewModelProviders.of(this).get(ItemViewModel.class);
 
-        final RecyclerView recyclerView = binding.rec;
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        adapterItem=new AdapterItem(itemViewModel.getAllItems().getValue());
-        recyclerView.setAdapter(adapterItem);
+
+        activityMainBinding.rec.setLayoutManager(layoutManager);
+        activityMainBinding.rec.setHasFixedSize(true);
+        ArrayList<Item>x=new ArrayList<>();
+        adapterItem=new AdapterItem();
+        activityMainBinding.rec.setAdapter(adapterItem);
 
 
 
-
-        itemViewModel.getAllItems().observe(this, new Observer<ArrayList<Item>>() {
-            @Override
-            public void onChanged(ArrayList<Item> items) {
-                adapterItem.notifyDataSetChanged();
-            }
-        });
 
 
 

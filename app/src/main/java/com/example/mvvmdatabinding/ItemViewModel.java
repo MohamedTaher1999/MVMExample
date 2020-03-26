@@ -14,9 +14,10 @@ public class ItemViewModel extends ViewModel {
     public ItemViewModel() {
         repository=new DataRepository();
         allItems=new MutableLiveData<>();
-        allItems=new MutableLiveData<>();
-
         allItems=repository.getArray();
+    }
+    public MutableLiveData<ArrayList<Item>> getItemLiveDataLiveData() {
+        return allItems;
     }
 
     public MutableLiveData<ArrayList<Item>> getAllItems() {

@@ -2,6 +2,13 @@
 <layout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.mvvmdatabinding.ItemViewModel" />
+    </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
 
@@ -13,7 +20,7 @@
         android:id="@+id/rec"
         android:layout_width="409dp"
         android:layout_height="729dp"
-        tools:listitem="@layout/item"
+        app:adapter="@{viewModel.itemLiveDataLiveData}"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

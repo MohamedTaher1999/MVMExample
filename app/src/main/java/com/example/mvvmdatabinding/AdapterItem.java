@@ -15,28 +15,44 @@ import java.util.ArrayList;
 public class AdapterItem extends RecyclerView.Adapter<AdapterItem.ItemViewHolder>{
 
     private ArrayList<Item> items;
-    public AdapterItem(ArrayList<Item> items){
-        this.items = items;
+
+
+    public AdapterItem(){
+        items=new ArrayList<>();
+    }
+    public void clearItems(){
+
+        items.clear();
+    }
+    public void addItems(ArrayList<Item> items){
+        if(items!=null){
+        this.items.addAll(items);
+        notifyDataSetChanged();}
+
     }
 
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        ItemBinding itemBinding = ItemBinding.inflate(layoutInflater, parent, false);
 
-        return new ItemViewHolder(itemBinding);
+            LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+            ItemBinding itemBinding = ItemBinding.inflate(layoutInflater, parent, false);
+            return new ItemViewHolder(itemBinding);
+
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
-        holder.onBindItem(items.get(position));
+        if(items.size()>0){
+        holder.onBindItem(items.get(position));}
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return items != null && items.size() > 0 ? items.size() : 1;
     }
+
 
    public class ItemViewHolder extends RecyclerView.ViewHolder  {
        ItemBinding itemBinding;
@@ -51,4 +67,6 @@ public class AdapterItem extends RecyclerView.Adapter<AdapterItem.ItemViewHolder
            itemBinding.executePendingBindings();
        }
 }
+
+
 }
